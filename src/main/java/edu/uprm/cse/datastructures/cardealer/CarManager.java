@@ -31,7 +31,7 @@ public class CarManager {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Car getCar(@PathParam("id") long id) {
 		Optional<Car> match = Optional.empty();
-		for(int i=1; i<=carList.size(); i++) {
+		for(int i=0; i<carList.size(); i++) {
 			if(carList.get(i).getCarId()==id) {
 				match = Optional.of(carList.get(i));
 			}
@@ -43,19 +43,6 @@ public class CarManager {
 			throw new NotFoundException();
 		}
 	}
-
-/*		@GET
-	@Path("/{id}")				//read a car with given id
-	@Produces(MediaType.APPLICATION_JSON)	 
-	public Response getCar(@PathParam("id") long id){
-		for(int i=1;i<=carList.size();i++)
-		{
-			if(carList.get(i).getCarId()==id){
-				carList.get(i);		 
-			} 
-		}      
-		return Response.status(Response.Status.NOT_FOUND).build();
-	}*/
 
 	@POST
 	@Path("/add")
@@ -71,7 +58,7 @@ public class CarManager {
 	public Response updateCar(Car car) {
 
 		Optional<Car> match = Optional.empty();
-		for (int i = 1; i <= carList.size(); i++) {
+		for (int i = 0; i < carList.size(); i++) {
 			if (carList.get(i).getCarId() == car.getCarId() ) {
 				match = Optional.of(carList.get(i));
 			}
@@ -84,19 +71,17 @@ public class CarManager {
 		else return Response.status(Response.Status.NOT_FOUND).build();
 	}
 
-
-
 	@DELETE
 	@Path("/{id}/delete")
 	public Response deleteCar(@PathParam("id") long id)
 	{
-		
-		for(int i=1;i<=carList.size();i++){
+
+		for(int i=0;i<carList.size();i++){
 			if( carList.get(i).getCarId()==id){
 				carList.remove(i);
 				return Response.status(200).build();}	    	
 		}
-			return Response.status(Response.Status.NOT_FOUND).build(); 
+		return Response.status(Response.Status.NOT_FOUND).build(); 
 	}   
 
 

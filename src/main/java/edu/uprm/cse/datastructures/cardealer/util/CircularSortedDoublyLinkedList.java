@@ -113,9 +113,7 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E> {
 
 	@Override
 	public boolean remove(E obj) {
-
 		Node<E> removed = this.header.getNext();
-
 		if(this.isEmpty()) {
 			return false;
 		}
@@ -244,7 +242,7 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E> {
 
 	private Node<E> findPosition(int index){
 		Node<E> temp = this.header.getNext();
-		int i=1;
+		int i=0;
 
 		while (i<index) {
 			temp = temp.getNext();
