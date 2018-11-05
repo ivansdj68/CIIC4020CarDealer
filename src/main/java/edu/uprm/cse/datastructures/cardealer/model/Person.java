@@ -59,7 +59,6 @@ public class Person {
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
 		result = prime * result + (int) (age ^ (age >>> 32));
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
-		result = prime * result;
 		return result;
 	}
 	

@@ -41,22 +41,21 @@ public class CarUnit {
 		return personId;
 	}
 	
-	
-/*	@Override
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + (int) (carUnitId ^ (carUnitId >>> 32));
+		result = prime * result + (int) (carId ^ (carId >>> 32));
+		result = prime * result + ((VIN == null) ? 0 : VIN.hashCode());
+		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + ((carPlate == null) ? 0 : carPlate.hashCode());
 		result = prime * result + (int) (personId ^ (personId >>> 32));
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
-		result = prime * result + (int) (age ^ (age >>> 32));
-		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
-		result = prime * result;
 		return result;
-	}*/
+	}
 	
-/*	@Override
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -64,44 +63,36 @@ public class CarUnit {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Person other = (Person) obj;
-		if (firstName == null) {
-			if (other.firstName != null)
+		CarUnit other = (CarUnit) obj;
+		if (carUnitId != other.carUnitId)
+			return false;
+		if (carId != other.carId)
+			return false;
+		if (VIN == null) {
+			if (other.VIN != null)
 				return false;
-		} else if (!firstName.equals(other.firstName))
+		} else if (!VIN.equals(other.VIN))
+			return false;
+		if (color == null) {
+			if (other.color != null)
+				return false;
+		} else if (!color.equals(other.color))
+			return false;
+		if (carPlate == null) {
+			if (other.carPlate != null)
+				return false;
+		} else if (!carPlate.equals(other.carPlate))
 			return false;
 		if (personId != other.personId)
 			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (gender == null) {
-			if (other.gender != null)
-				return false;
-		} else if (!gender.equals(other.gender))
-			return false;
-		if (age != other.age)
-			return false;
-		if (phone == null) {
-			if (other.phone != null)
-				return false;
-		} else if (!phone.equals(other.phone))
-			return false;
 		return true;
-	}*/
-	
-/*	@Override
-	public String toString() {
-		return "Person [personId=" + personId + ", firstName=" + firstName + ", lastName=" + lastName + ", gender="
-				+ gender + ", age=" + age + ", phone=" + phone + "]";
 	}
-	*/
 	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "Person [carUnitId=" + carUnitId + ", carId=" + carId + ", VIN=" + VIN + ", color="
+				+ color + ", carPlate=" + carPlate + ", personId=" + personId + "]";
+	}
 	
 	
 }

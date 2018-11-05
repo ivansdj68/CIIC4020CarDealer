@@ -6,6 +6,8 @@ public class Appointment {
 	private long carUnitId; // id of the car to be serviced
 	private String job; // description of the job to be done (i.e.: “oil change”)
 	private double bill; // cost of the service (initially 0).
+	
+	public Appointment() { }
 
 	public Appointment(long appointmentId, long carUnitId, String job, double bill) {
 		super();
@@ -18,26 +20,63 @@ public class Appointment {
 	public long getAppointmentId() {
 		return appointmentId;
 	}
-	public void setAppointmentId(long appointmentId) {
-		this.appointmentId = appointmentId;
-	}
 	public long getCarUnitId() {
 		return carUnitId;
-	}
-	public void setCarUnitId(long carUnitId) {
-		this.carUnitId = carUnitId;
 	}
 	public String getJob() {
 		return job;
 	}
-	public void setJob(String job) {
-		this.job = job;
-	}
 	public double getBill() {
 		return bill;
 	}
-	public void setBill(double bill) {
-		this.bill = bill;
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (appointmentId ^ (appointmentId >>> 32));
+		result = prime * result + (int) (carUnitId ^ (carUnitId >>> 32));
+		result = prime * result + ((job == null) ? 0 : job.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(bill);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Appointment other = (Appointment) obj;
+		if (appointmentId != other.appointmentId)
+			return false;
+		if (carUnitId != other.carUnitId)
+			return false;
+		if (job == null) {
+			if (other.job != null)
+				return false;
+		} else if (!job.equals(other.job))
+			return false;
+		if (Double.doubleToLongBits(bill) != Double.doubleToLongBits(other.bill))
+			return false;
+		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "Person [appointmentId=" + appointmentId + ", carUnitId=" + carUnitId + ", Job=" + job 
+				+ ", Bill=" + bill + "]";
+	}
+	
+	
+	
+	
+	
+	
 
 }
