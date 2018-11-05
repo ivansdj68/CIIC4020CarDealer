@@ -11,13 +11,13 @@ public class CircularSortedDoublyLinkedListTester1 {
 
 		System.out.println("Adding cars... \n");
 		
-		list.add(new Car(1,"Toyota","Highlander","Limited",52000));
-		list.add(new Car(3,"Toyota","Highlander","XLE",25000));
-		list.add(new Car(2,"Hyundai","Tuscon","SE",25000));
-		list.add(new Car(4,"Honda","Fit","LE",15000));
-		list.add(new Car(5,"Ford","F-150","Raptor",95000));
-		list.add(new Car(6,"Ford","F-150","Limited",55000));
-		list.add(new Car(5,"RAM","1500","BigHorn",65000));
+		list.add(new Car(1,"Toyota","Highlander","Limited", 0000, 52000));
+		list.add(new Car(3,"Toyota","Highlander","XLE", 0000, 25000));
+		list.add(new Car(2,"Hyundai","Tuscon","SE", 0000, 25000));
+		list.add(new Car(4,"Honda","Fit","LE",0000, 15000));
+		list.add(new Car(5,"Ford","F-150","Raptor",0000, 95000));
+		list.add(new Car(6,"Ford","F-150","Limited",0000, 55000));
+		list.add(new Car(5,"RAM","1500","BigHorn", 0000, 65000));
 
 		System.out.println("Full list: \n");
 

@@ -1,11 +1,14 @@
 package edu.uprm.cse.datastructures.cardealer.model;
 // Car class pojo
 public class Car {
+	
 	private long carId;
 	private String carBrand;
 	private String carModel;
 	private String carModelOption;
+	private int year;
 	private double carPrice;
+	
 	public long getCarId() {
 		return carId;
 	}
@@ -18,21 +21,28 @@ public class Car {
 	public String getCarModelOption() {
 		return carModelOption;
 	}
+	public int getYear() {
+		return year;
+	}
 	public double getCarPrice() {
 		return carPrice;
 	}
-	
+
 	public Car() {
-		
+
 	}
-	public Car(long carId, String carBrand, String carModel, String carModelOption, double carPrice) {
+	
+	public Car(long carId, String carBrand, String carModel, String carModelOption, int year, double carPrice) {
 		super();
 		this.carId = carId;
 		this.carBrand = carBrand;
 		this.carModel = carModel;
 		this.carModelOption = carModelOption;
+		this.year = year;
 		this.carPrice = carPrice;
 	}
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -41,11 +51,13 @@ public class Car {
 		result = prime * result + (int) (carId ^ (carId >>> 32));
 		result = prime * result + ((carModel == null) ? 0 : carModel.hashCode());
 		result = prime * result + ((carModelOption == null) ? 0 : carModelOption.hashCode());
+		result = prime * result + (int) (year ^ (year >>> 32));
 		long temp;
 		temp = Double.doubleToLongBits(carPrice);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -72,14 +84,17 @@ public class Car {
 				return false;
 		} else if (!carModelOption.equals(other.carModelOption))
 			return false;
+		if (year != other.year)
+			return false;
 		if (Double.doubleToLongBits(carPrice) != Double.doubleToLongBits(other.carPrice))
 			return false;
 		return true;
 	}
+	
 	@Override
 	public String toString() {
 		return "Car [carId=" + carId + ", carBrand=" + carBrand + ", carModel=" + carModel + ", carModelOption="
-				+ carModelOption + ", carPrice=" + carPrice + "]";
+				+ carModelOption + ", year=" + year + ", carPrice=" + carPrice + "]";
 	}
-	
+
 }
