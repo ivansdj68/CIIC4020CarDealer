@@ -5,18 +5,18 @@ public class CarUnit {
 	private long carUnitId; // internal id of the unit
 	private long carId; // id of the car object that represents the general for the car. 
 	// This Car from project 1.
-	private String VIN; // vehicle identification number
+	private String vin; // vehicle identification number
 	private String color; // car color
 	private String carPlate; // car plate (null until sold)
 	private long personId; // id of the person who purchased the car. (null until purchased)
 	
 	public CarUnit() { }
 
-	public CarUnit(long carUnitId, long carId, String VIN, String color, String carPlate, long personId) {
+	public CarUnit(long carUnitId, long carId, String vin, String color, String carPlate, long personId) {
 		super();
 		this.carUnitId = carUnitId;
 		this.carId = carId;
-		this.VIN = VIN;
+		this.vin = vin;
 		this.color = color;
 		this.carPlate = carPlate;
 		this.personId = personId;
@@ -29,7 +29,7 @@ public class CarUnit {
 		return carId;
 	}
 	public String getVIN() {
-		return VIN;
+		return vin;
 	}
 	public String getColor() {
 		return color;
@@ -48,7 +48,7 @@ public class CarUnit {
 		int result = 1;
 		result = prime * result + (int) (carUnitId ^ (carUnitId >>> 32));
 		result = prime * result + (int) (carId ^ (carId >>> 32));
-		result = prime * result + ((VIN == null) ? 0 : VIN.hashCode());
+		result = prime * result + ((vin == null) ? 0 : vin.hashCode());
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
 		result = prime * result + ((carPlate == null) ? 0 : carPlate.hashCode());
 		result = prime * result + (int) (personId ^ (personId >>> 32));
@@ -68,10 +68,10 @@ public class CarUnit {
 			return false;
 		if (carId != other.carId)
 			return false;
-		if (VIN == null) {
-			if (other.VIN != null)
+		if (vin == null) {
+			if (other.vin != null)
 				return false;
-		} else if (!VIN.equals(other.VIN))
+		} else if (!vin.equals(other.vin))
 			return false;
 		if (color == null) {
 			if (other.color != null)
@@ -90,7 +90,7 @@ public class CarUnit {
 	
 	@Override
 	public String toString() {
-		return "Person [carUnitId=" + carUnitId + ", carId=" + carId + ", VIN=" + VIN + ", color="
+		return "Person [carUnitId=" + carUnitId + ", carId=" + carId + ", VIN=" + vin + ", color="
 				+ color + ", carPlate=" + carPlate + ", personId=" + personId + "]";
 	}
 	

@@ -1,6 +1,8 @@
 package edu.uprm.cse.datastructures.cardealer.util;
 
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import edu.uprm.cse.datastructures.cardealer.model.Car;
 import edu.uprm.cse.datastructures.cardealer.model.CarComparator;
@@ -52,9 +54,16 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E> {
 
 	}
 
-	Node<E> header;
-	int currentSize;
-	CarComparator cp = new CarComparator();
+	private Node<E> header;
+	private int currentSize;
+	private Comparator<E> cp;
+
+	public CircularSortedDoublyLinkedList(Comparator<E> cp) {
+		super();
+		this.header = new Node<E>(null, this.header, this.header);
+		this.currentSize = 0;
+		this.cp = cp;
+	}
 
 	public CircularSortedDoublyLinkedList() {
 		super();
@@ -68,10 +77,34 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E> {
 		this.currentSize = currentSize;
 	}
 
-	@Override
 	public Iterator<E> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ListIteratorLR();
+	}
+
+	private class ListIteratorLR implements Iterator<E> {
+		Node<E> current;
+
+		public ListIteratorLR(){
+			this.current = header.getNext();
+		}
+		public boolean hasNext(){ 
+			return this.current != header; 
+		}
+
+		public E next() {
+			if(hasNext()){
+				E n = this.current.getElement();
+				this.current = this.current.getNext();
+				return n;
+			}
+			else{
+				throw new NoSuchElementException("No more elements to iterate over.");
+			}
+		}
+
+		public void remove() {
+			throw new UnsupportedOperationException("Remove method not implemented."); 
+		}
 	}
 
 	@Override
@@ -88,7 +121,7 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E> {
 		else {
 			Node<E> nextNode = this.header.getNext();
 			while(nextNode != this.header) {
-				if(cp.compare((Car)newNode.getElement(), (Car)nextNode.getElement()) <= 0) {
+				if(cp.compare(newNode.getElement(), nextNode.getElement()) <= 0) {
 					newNode.setPrev(nextNode.getPrev());
 					nextNode.getPrev().setNext(newNode);
 					nextNode.setPrev(newNode);
@@ -254,7 +287,7 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E> {
 
 	public E[] toArray () {
 		@SuppressWarnings("unchecked")
-		E[] result = (E[]) new Car[this.currentSize];
+		E[] result = (E[]) new Object[this.currentSize];
 		int i = 0;
 		Node<E> temp = this.header.getNext();
 		while(temp != this.header) {

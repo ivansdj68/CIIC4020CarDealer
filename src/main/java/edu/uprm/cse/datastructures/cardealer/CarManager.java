@@ -1,6 +1,7 @@
 package edu.uprm.cse.datastructures.cardealer;
 
 import java.util.Optional;
+
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -12,12 +13,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import edu.uprm.cse.datastructures.cardealer.model.Car;
+import edu.uprm.cse.datastructures.cardealer.model.CarComparator;
 import edu.uprm.cse.datastructures.cardealer.util.CircularSortedDoublyLinkedList;       
 
 @Path("/cars")
 public class CarManager {
 
-	private static CircularSortedDoublyLinkedList<Car> carList = new CircularSortedDoublyLinkedList<Car>();
+	private static CircularSortedDoublyLinkedList<Car> carList 
+		= new CircularSortedDoublyLinkedList<Car>(new CarComparator());
 
 	@GET
 	@Path("")
@@ -33,6 +36,42 @@ public class CarManager {
 		Optional<Car> match = Optional.empty();
 		for(int i=0; i<carList.size(); i++) {
 			if(carList.get(i).getCarId()==id) {
+				match = Optional.of(carList.get(i));
+			}
+		}
+		if(match.isPresent()) {
+			return match.get();
+		}
+		else {
+			throw new NotFoundException();
+		}
+	}
+	
+	@GET
+	@Path("/brand/{carBrand}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Car getCarBrand(@PathParam("carBrand") String carBrand) {
+		Optional<Car> match = Optional.empty();
+		for(int i=0; i<carList.size(); i++) {
+			if(carList.get(i).getCarBrand()==carBrand) {
+				match = Optional.of(carList.get(i));
+			}
+		}
+		if(match.isPresent()) {
+			return match.get();
+		}
+		else {
+			throw new NotFoundException();
+		}
+	}
+	
+	@GET
+	@Path("/year/{year}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Car getCarYear(@PathParam("year") int year) {
+		Optional<Car> match = Optional.empty();
+		for(int i=0; i<carList.size(); i++) {
+			if(carList.get(i).getYear()==year) {
 				match = Optional.of(carList.get(i));
 			}
 		}

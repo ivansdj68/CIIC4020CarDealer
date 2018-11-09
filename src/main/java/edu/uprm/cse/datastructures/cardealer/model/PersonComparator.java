@@ -11,10 +11,8 @@ public class PersonComparator implements Comparator<Person>{
 	@Override
 	public int compare(Person p1, Person p2) {
 
-		String person1String = p1.getFirstName() + p1.getLastName()
-			+ p1.getPhone();
-		String person2String = p2.getFirstName() + p2.getLastName()
-			+ p2.getPhone();
+		String person1String =  p1.getLastName() + p1.getFirstName();
+		String person2String = p2.getLastName() + p2.getFirstName();
 
 		return person1String.compareTo(person2String);
 	}
