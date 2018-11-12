@@ -28,7 +28,7 @@ public class CarUnit {
 	public long getCarId() {
 		return carId;
 	}
-	public String getVIN() {
+	public String getVin() {
 		return vin;
 	}
 	public String getColor() {

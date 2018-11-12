@@ -1,5 +1,6 @@
 package edu.uprm.cse.datastructures.cardealer;
 
+import java.util.Iterator;
 import java.util.Optional;
 
 import javax.ws.rs.DELETE;
@@ -14,6 +15,7 @@ import javax.ws.rs.core.Response;
 
 import edu.uprm.cse.datastructures.cardealer.model.CarUnit;
 import edu.uprm.cse.datastructures.cardealer.model.CarUnitComparator;
+import edu.uprm.cse.datastructures.cardealer.model.Person;
 import edu.uprm.cse.datastructures.cardealer.util.CircularSortedDoublyLinkedList;
 
 @Path("/carunit")
@@ -22,11 +24,15 @@ public class CarUnitManager {
 	private static CircularSortedDoublyLinkedList<CarUnit> carUnitList 
 		= new CircularSortedDoublyLinkedList<CarUnit>(new CarUnitComparator());
 
-	@GET
-	@Path("")
+	@GET	 
 	@Produces(MediaType.APPLICATION_JSON)
 	public CarUnit[] getAllCarUnits() {
-		return carUnitList.toArray();
+		Iterator<CarUnit> iter= carUnitList.iterator();
+		CarUnit[] cu=new CarUnit[carUnitList.size()];
+		int i=0;
+		while(iter.hasNext())
+			cu[i++]=(CarUnit) iter.next();
+		return cu;
 	}
 
 	@GET
@@ -50,7 +56,13 @@ public class CarUnitManager {
 	@POST
 	@Path("/add")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addCarUnit(CarUnit carUnit) {
+	public Response addCarUnit(CarUnit carUnit){
+		
+		for(int i=0;i<carUnitList.size();i++){
+			 if(carUnit.getCarUnitId()==carUnitList.get(i).getCarUnitId()){
+				 return Response.status(Response.Status.FOUND).build();		
+			}
+		}
 		carUnitList.add(carUnit);
 		return Response.status(201).build();
 	}

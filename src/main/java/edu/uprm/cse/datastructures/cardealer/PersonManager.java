@@ -1,5 +1,6 @@
 package edu.uprm.cse.datastructures.cardealer;
 
+import java.util.Iterator;
 import java.util.Optional;
 
 import javax.ws.rs.DELETE;
@@ -20,13 +21,17 @@ import edu.uprm.cse.datastructures.cardealer.util.CircularSortedDoublyLinkedList
 public class PersonManager {
 
 	private static CircularSortedDoublyLinkedList<Person> personList 
-		= new CircularSortedDoublyLinkedList<Person>(new PersonComparator());
+	= new CircularSortedDoublyLinkedList<Person>(new PersonComparator());
 
-	@GET
-	@Path("")
+	@GET	 
 	@Produces(MediaType.APPLICATION_JSON)
 	public Person[] getAllPersons() {
-		return personList.toArray();
+		Iterator<Person> iter= personList.iterator();
+		Person[] p=new Person[personList.size()];
+		int i=0;
+		while(iter.hasNext())
+			p[i++]=(Person) iter.next();
+		return p;
 	}
 
 	@GET
@@ -46,7 +51,7 @@ public class PersonManager {
 			throw new NotFoundException();
 		}
 	}
-	
+
 	@GET
 	@Path("/lastname/{lastName}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -68,7 +73,13 @@ public class PersonManager {
 	@POST
 	@Path("/add")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addPerson(Person person) {
+	public Response addPerson(Person person){
+		
+		for(int i=0;i<personList.size();i++){
+			 if(person.getPersonId()==personList.get(i).getPersonId()){
+				 return Response.status(Response.Status.FOUND).build();		
+			}
+		}
 		personList.add(person);
 		return Response.status(201).build();
 	}

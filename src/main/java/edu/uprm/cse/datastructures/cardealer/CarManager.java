@@ -1,5 +1,6 @@
 package edu.uprm.cse.datastructures.cardealer;
 
+import java.util.Iterator;
 import java.util.Optional;
 
 import javax.ws.rs.DELETE;
@@ -14,19 +15,24 @@ import javax.ws.rs.core.Response;
 
 import edu.uprm.cse.datastructures.cardealer.model.Car;
 import edu.uprm.cse.datastructures.cardealer.model.CarComparator;
-import edu.uprm.cse.datastructures.cardealer.util.CircularSortedDoublyLinkedList;       
+import edu.uprm.cse.datastructures.cardealer.model.Person;
+import edu.uprm.cse.datastructures.cardealer.util.CircularSortedDoublyLinkedList;  
 
 @Path("/cars")
 public class CarManager {
-
+ 
 	private static CircularSortedDoublyLinkedList<Car> carList 
-		= new CircularSortedDoublyLinkedList<Car>(new CarComparator());
-
-	@GET
-	@Path("")
+	= new CircularSortedDoublyLinkedList<Car>(new CarComparator());
+	
+	@GET	 
 	@Produces(MediaType.APPLICATION_JSON)
 	public Car[] getAllCars() {
-		return carList.toArray();
+		Iterator<Car> iter= carList.iterator();
+		Car[] c=new Car[carList.size()];
+		int i=0;
+		while(iter.hasNext())
+			c[i++]=(Car) iter.next();
+		return c;
 	}
 
 	@GET
@@ -95,13 +101,19 @@ public class CarManager {
 				nCarList.add(e);
 			}
 		}
-		return nCarList.toArray();
+		return (Car[]) nCarList.toArray();
 	}
 
 	@POST
 	@Path("/add")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addCar(Car car) {
+	public Response addCar(Car car){
+		
+		for(int i=0;i<carList.size();i++){
+			 if(car.getCarId()==carList.get(i).getCarId()){
+				 return Response.status(Response.Status.FOUND).build();		
+			}
+		}
 		carList.add(car);
 		return Response.status(201).build();
 	}

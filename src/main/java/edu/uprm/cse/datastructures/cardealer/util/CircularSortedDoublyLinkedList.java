@@ -232,7 +232,13 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E> {
 
 	@Override
 	public boolean contains(E e) {
-		return e.equals(findPosition(firstIndex(e)).getElement());
+		for(int i=0; i<this.size(); i++) {
+			if(this.get(i).equals(e)) {
+				return true;
+			}
+		}
+		return false;
+		//return e.equals(findPosition(firstIndex(e)).getElement());
 	}
 
 	@Override
@@ -285,10 +291,22 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E> {
 
 		return temp;
 	}
-
-	public E[] toArray () {
+	
+	public Object[] toArray() {
 		@SuppressWarnings("unchecked")
-		E[] result = (E[]) new Object[this.currentSize];
+		E[] carArray=(E[]) new Object[this.size()];
+
+		Node<E> refNode=header.getNext();
+		for(int i=0;i<this.size();i++){
+			carArray[i] = refNode.getElement();
+			refNode=refNode.getNext();
+		}	
+		return carArray;
+	}
+
+/*	@SuppressWarnings("unchecked")
+	public E[] toArray () {
+		Object[] result = (E[]) new Object[this.currentSize];
 		int i = 0;
 		Node<E> temp = this.header.getNext();
 		while(temp != this.header) {
@@ -296,8 +314,8 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E> {
 			i++;
 			temp = temp.getNext();
 		}
-		return result;
-	}
+		return (E[]) result;
+	}*/
 
 	// Checks that the index is valid for the list
 	private void checkBounds(int index, int min, int max) {

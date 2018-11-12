@@ -32,14 +32,14 @@ public class Car {
 
 	}
 	
-	public Car(long carId, String carBrand, String carModel, String carModelOption, int year, double carPrice) {
+	public Car(long carId, String carBrand, String carModel, String carModelOption, double carPrice, int year) {
 		super();
 		this.carId = carId;
 		this.carBrand = carBrand;
 		this.carModel = carModel;
 		this.carModelOption = carModelOption;
-		this.year = year;
 		this.carPrice = carPrice;
+		this.year = year;
 	}
 	
 
@@ -94,7 +94,7 @@ public class Car {
 	@Override
 	public String toString() {
 		return "Car [carId=" + carId + ", carBrand=" + carBrand + ", carModel=" + carModel + ", carModelOption="
-				+ carModelOption + ", year=" + year + ", carPrice=" + carPrice + "]";
+				+ carModelOption + ", carPrice=" + carPrice + ", year=" + year + "]";
 	}
 
 }

@@ -5,13 +5,13 @@ public class Person {
 	private long personId; // internal id of the person
 	private String firstName; // first name
 	private String lastName; // last name
-	private Integer age; // age
-	private Character gender; // gender
+	private int age; // age
+	private char gender; // gender
 	private String phone; // phone number
 	
 	public Person() { }
 
-	public Person(long personId, String firstName, String lastName, Integer age, Character gender, String phone) {
+	public Person(long personId, String firstName, String lastName, int age, char gender, String phone) {
 		super();
 		this.personId = personId;
 		this.firstName = firstName;
@@ -24,25 +24,16 @@ public class Person {
 	public long getPersonId() {
 		return personId;
 	}
-	public void setPersonId(long personId) {
-		this.personId = personId;
-	}
 	public String getFirstName() {
 		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
 	}
 	public String getLastName() {
 		return lastName;
 	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public Integer getAge() {
+	public int getAge() {
 		return age;
 	}
-	public Character getGender() {
+	public char getGender() {
 		return gender;
 	}
 	public String getPhone() {
@@ -56,7 +47,7 @@ public class Person {
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + (int) (personId ^ (personId >>> 32));
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+		//result = prime * result + ((gender == ' ') ? 0 : gender.hashCode());
 		result = prime * result + (int) (age ^ (age >>> 32));
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
 		return result;
@@ -83,10 +74,7 @@ public class Person {
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
-		if (gender == null) {
-			if (other.gender != null)
-				return false;
-		} else if (!gender.equals(other.gender))
+		if (gender != other.gender)
 			return false;
 		if (age != other.age)
 			return false;

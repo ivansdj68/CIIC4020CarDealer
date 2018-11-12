@@ -25,6 +25,8 @@ public class AppointmentManager {
 	private static LinkedPositionalList<Appointment>[] appointmentList 
 	= new LinkedPositionalList[5];
 
+	private String[] week = {"Monday, Tuesday", "Wednesday", "Thursday", "Friday"};
+
 	public AppointmentManager() {
 		for(int i=0; i<appointmentList.length; i++) {
 			appointmentList[i] = new LinkedPositionalList<Appointment>();
@@ -39,6 +41,20 @@ public class AppointmentManager {
 	}
 
 	@GET
+	@Path("/day/{d}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public LinkedPositionalList<Appointment> getAllAppointmentsForDay(@PathParam("d") String d) {
+
+		for(int i=0; i<appointmentList.length; i++){		
+			if(week[i].equals(d)){
+				return appointmentList[i];
+			}
+		}
+
+		return null;
+	}
+
+	/*	@GET
 	@Path("/day/{d}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public LinkedPositionalList<Appointment> getAllAppointmentsForDay(@PathParam("d") String d) {
@@ -72,7 +88,7 @@ public class AppointmentManager {
 		}
 
 		return null;
-	}
+	}*/
 
 	@GET
 	@Path("/{id}")
@@ -85,9 +101,9 @@ public class AppointmentManager {
 			while(ap.getAppointmentId()!=id) {
 				ap = day.iterator().next();
 			}
-			
+
 			match = Optional.of(ap);
-			
+
 		}
 
 		if(match.isPresent()) {
@@ -98,7 +114,7 @@ public class AppointmentManager {
 		}
 	}
 
-/*		@GET
+	/*		@GET
 		@Path("/{id}")
 		@Produces(MediaType.APPLICATION_JSON)
 		public Appointment getAppointment(@PathParam("id") long id) {
@@ -116,15 +132,15 @@ public class AppointmentManager {
 			}
 		}*/
 
-/*	@POST
+	/*	@POST
 	@Path("/add")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addCarUnit(Appointment appointment) {
 		appointmentList.add(appointment);
 		return Response.status(201).build();
 	}*/
-	
-		@POST
+
+	/*		@POST
 	@Path("/add/{day}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addAppointmentOnDay(Appointment appointment, @PathParam("day") String day) {
@@ -161,6 +177,19 @@ public class AppointmentManager {
 
 			}
 		return Response.status(Response.Status.NOT_FOUND).build(); 
+	}*/
+
+	@POST
+	@Path("/add/{day}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addAppointment(Appointment a, @PathParam("day") String day){
+		for(int i=0; i<appointmentList.length; i++){		
+			if(week[i].equals(day)){
+				appointmentList[i].addLast(a);
+				return Response.status(201).build();
+			}
+		}		
+		return Response.status(Response.Status.NOT_FOUND).build(); 
 	}
 
 	@SuppressWarnings("unchecked")
@@ -179,9 +208,9 @@ public class AppointmentManager {
 			while(ap.getAppointmentId()!=appointment.getAppointmentId()) {
 				ap = day.iterator().next();
 			}
-			
+
 			match = Optional.of(ap);
-			
+
 		}
 		if (match.isPresent()) {
 			appointmentList[i].remove((Position<Appointment>)match.get());
@@ -201,11 +230,11 @@ public class AppointmentManager {
 			if(day!=appointmentList[0]) {
 				i++;
 			}
-			
+
 			while(ap.getAppointmentId()!=id) {
 				ap = day.iterator().next();
 			}
-			
+
 			appointmentList[i].remove((Position<Appointment>)ap);
 			return Response.status(200).build();
 		}

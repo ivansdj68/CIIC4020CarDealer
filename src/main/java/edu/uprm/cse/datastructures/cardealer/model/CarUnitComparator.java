@@ -11,9 +11,9 @@ public class CarUnitComparator implements Comparator<CarUnit> {
 	@Override
 	public int compare(CarUnit cU1, CarUnit cU2) {
 
-		String carUnitString1 = cU1.getVIN();
+		String carUnitString1 = cU1.getVin();
 		
-		String carUnitString2 = cU2.getVIN();
+		String carUnitString2 = cU2.getVin();
 
 		return carUnitString1.compareTo(carUnitString2);
 	}
