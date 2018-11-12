@@ -273,7 +273,8 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E> {
 		return index;
 	}
 
-	private Node<E> findPosition(int index){
+	// Finds and returns the node at index i
+	public Node<E> findPosition(int index){
 		Node<E> temp = this.header.getNext();
 		int i=0;
 
@@ -298,6 +299,7 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E> {
 		return result;
 	}
 
+	// Checks that the index is valid for the list
 	private void checkBounds(int index, int min, int max) {
 		if(index<min || index>max) {
 			throw new IndexOutOfBoundsException();

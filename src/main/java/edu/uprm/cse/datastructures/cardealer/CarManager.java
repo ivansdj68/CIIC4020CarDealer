@@ -65,7 +65,7 @@ public class CarManager {
 		}
 	}
 	
-	@GET
+/*	@GET
 	@Path("/year/{year}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Car getCarYear(@PathParam("year") int year) {
@@ -81,6 +81,21 @@ public class CarManager {
 		else {
 			throw new NotFoundException();
 		}
+	}*/
+	
+	@GET
+	@Path("/year/{y}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Car[] getCarYear(@PathParam("year") int y) {
+		CircularSortedDoublyLinkedList<Car> nCarList 
+		= new CircularSortedDoublyLinkedList<Car>(new CarComparator());
+		
+		for(Car e: carList) {
+			if(e.getYear()==y) {
+				nCarList.add(e);
+			}
+		}
+		return nCarList.toArray();
 	}
 
 	@POST
