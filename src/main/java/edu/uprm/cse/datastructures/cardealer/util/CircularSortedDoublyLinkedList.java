@@ -304,19 +304,6 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E> {
 		return carArray;
 	}
 
-/*	@SuppressWarnings("unchecked")
-	public E[] toArray () {
-		Object[] result = (E[]) new Object[this.currentSize];
-		int i = 0;
-		Node<E> temp = this.header.getNext();
-		while(temp != this.header) {
-			result[i] = temp.getElement();
-			i++;
-			temp = temp.getNext();
-		}
-		return (E[]) result;
-	}*/
-
 	// Checks that the index is valid for the list
 	private void checkBounds(int index, int min, int max) {
 		if(index<min || index>max) {

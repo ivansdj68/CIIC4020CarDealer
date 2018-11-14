@@ -59,7 +59,7 @@ public class CarManager {
 	public Car getCarBrand(@PathParam("carBrand") String carBrand) {
 		Optional<Car> match = Optional.empty();
 		for(int i=0; i<carList.size(); i++) {
-			if(carList.get(i).getCarBrand()==carBrand) {
+			if(carList.get(i).getCarBrand().equals(carBrand)) {
 				match = Optional.of(carList.get(i));
 			}
 		}
@@ -70,24 +70,6 @@ public class CarManager {
 			throw new NotFoundException();
 		}
 	}
-	
-/*	@GET
-	@Path("/year/{year}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Car getCarYear(@PathParam("year") int year) {
-		Optional<Car> match = Optional.empty();
-		for(int i=0; i<carList.size(); i++) {
-			if(carList.get(i).getYear()==year) {
-				match = Optional.of(carList.get(i));
-			}
-		}
-		if(match.isPresent()) {
-			return match.get();
-		}
-		else {
-			throw new NotFoundException();
-		}
-	}*/
 	
 	@GET
 	@Path("/year/{y}")
