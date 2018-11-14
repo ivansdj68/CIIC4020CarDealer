@@ -213,6 +213,17 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 		return temp;
 	}
 
+	public Object[] toArray() {
+		@SuppressWarnings("unchecked")
+		E[] carArray=(E[]) new Object[this.size()];
+
+		Node<E> refNode=header.getNext();
+		for(int i=0;i<this.size();i++){
+			carArray[i] = refNode.getElement();
+			refNode=refNode.getNext();
+		}	
+		return carArray;
+	}
 
 	// Implementation of Iterator and Iterable...
 	private class PositionIterator implements Iterator<Position<E>> {

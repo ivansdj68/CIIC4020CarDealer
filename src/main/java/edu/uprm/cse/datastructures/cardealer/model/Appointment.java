@@ -69,8 +69,8 @@ public class Appointment {
 	
 	@Override
 	public String toString() {
-		return "Person [appointmentId=" + appointmentId + ", carUnitId=" + carUnitId + ", Job=" + job 
-				+ ", Bill=" + bill + "]";
+		return "Person [appointmentId=" + appointmentId + ", carUnitId=" + carUnitId + ", job=" + job 
+				+ ", bill=" + bill + "]";
 	}
 	
 	
