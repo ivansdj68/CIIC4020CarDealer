@@ -1,5 +1,6 @@
 package edu.uprm.cse.datastructures.cardealer.testers;
 
+import edu.uprm.cse.datastructures.cardealer.model.Appointment;
 import edu.uprm.cse.datastructures.cardealer.model.Car;
 import edu.uprm.cse.datastructures.cardealer.util.CircularSortedDoublyLinkedList;
 
@@ -21,8 +22,8 @@ public class CircularSortedDoublyLinkedListTester1 {
 
 		System.out.println("Full list: \n");
 
-		for(int i=0; i<list.size(); i++) {
-			System.out.println(list.toArray()[i] + "\n");
+		for(Car p: list) {
+			System.out.println(p);
 		}
 		
 		

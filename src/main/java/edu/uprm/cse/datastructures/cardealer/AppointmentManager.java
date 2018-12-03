@@ -79,7 +79,7 @@ public class AppointmentManager {
 	}
 	
 	//Both add methods work when adding the appointment a second time in the terminal
-	@POST
+/*	@POST
 	@Path("add/{day}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addAppointmentOnDay(Appointment appointment, @PathParam("day") String day){
@@ -91,14 +91,14 @@ public class AppointmentManager {
 			}
 		}
 		return Response.status(Response.Status.NOT_FOUND).build();
-	}
+	}*/
 
 		@POST
 	@Path("add/{day}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addAppointmentOnDay(Appointment appointment, @PathParam("day") int day){
 
-		if(day>=0&& day<5){	
+		if(day>=0 && day<5){	
 			appointmentList[day].addLast(appointment);			
 			return Response.status(201).build();
 		}
